@@ -1,0 +1,6 @@
+# ninja log v5
+0	426	0	CMakeFiles/MagicJni.dir/src/main/cpp/bitmap/Conversion.cpp.o	62c69410ab93998
+5	450	0	CMakeFiles/MagicJni.dir/src/main/cpp/MagicJni.cpp.o	3e65e11552eec7cc
+2	494	0	CMakeFiles/MagicJni.dir/src/main/cpp/bitmap/BitmapOperation.cpp.o	ea2d557cc4cf8e75
+3	544	0	CMakeFiles/MagicJni.dir/src/main/cpp/beautify/MagicBeautify.cpp.o	447f16213d03a783
+544	758	0	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libMagicJni.so	ffb118307ab65bd1
