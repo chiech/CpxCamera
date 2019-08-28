@@ -26,6 +26,7 @@ public class SavePictureTask extends AsyncTask<Bitmap, Integer, String>{
 	private OnPictureSaveListener onPictureSaveListener;
 	private File file;
 	private int Angle;
+	private static final String TAG = "SavePictureTask";
 
 	public SavePictureTask(File file, OnPictureSaveListener listener,int angle){
 		this.onPictureSaveListener = listener;
@@ -48,6 +49,7 @@ public class SavePictureTask extends AsyncTask<Bitmap, Integer, String>{
 	                    public void onScanCompleted(final String path, final Uri uri) {
 	                        if (onPictureSaveListener != null)
                                 onPictureSaveListener.onSaved(result);
+							Log.e(TAG, "onScanCompleted: "+result );
 	                    }
             	});
 
@@ -85,5 +87,9 @@ public class SavePictureTask extends AsyncTask<Bitmap, Integer, String>{
 	
 	public interface OnPictureSaveListener{
 		void onSaved(String result);
+	}
+
+	public void setOnPictureSaveListener(OnPictureSaveListener onPictureSaveListener) {
+		this.onPictureSaveListener = onPictureSaveListener;
 	}
 }

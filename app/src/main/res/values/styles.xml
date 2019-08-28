@@ -18,6 +18,12 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
+    <style name="CameraTheme" parent="AppBaseTheme">
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
     
     <style name="SeekBar">
         <item name="android:paddingLeft">15.0dip</item>

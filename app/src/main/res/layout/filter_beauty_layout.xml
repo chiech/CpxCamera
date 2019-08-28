@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/filter_color_white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="BeautyLevel"
+            android:textSize="20sp"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/btn_camera_beauty_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:src="@drawable/pop_close_btn"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <com.warkiz.widget.IndicatorSeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:isb_max="5"
+        app:isb_min="1"
+        app:isb_progress="25"
+        app:isb_seek_smoothly="true"
+        app:isb_ticks_count="5"
+        app:isb_show_tick_marks_type="oval"
+        app:isb_tick_marks_size="13dp"
+        app:isb_tick_marks_drawable="@drawable/photo_btn"
+        app:isb_show_tick_texts="true"
+        app:isb_tick_texts_size="15sp"
+        app:isb_tick_texts_color="@color/filter_color_pink_light"
+        app:isb_thumb_color="@color/filter_color_pink_light"
+        app:isb_thumb_size="20dp"
+        app:isb_show_indicator="rounded_rectangle"
+        app:isb_indicator_color="@color/filter_color_grey_light"
+        app:isb_indicator_text_color="@color/filter_color_red"
+        app:isb_indicator_text_size="18sp"
+        app:isb_track_background_color="@color/filter_color_grey_light"
+        app:isb_track_background_size="2dp"
+        app:isb_track_progress_color="@color/filter_color_pink_light"
+        app:isb_track_progress_size="4dp"
+        app:isb_only_thumb_draggable="false"/>
+
+</LinearLayout>

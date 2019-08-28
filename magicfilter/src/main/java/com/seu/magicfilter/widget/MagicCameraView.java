@@ -217,6 +217,7 @@ public class MagicCameraView extends MagicBaseView {
         });
     }
 
+
     private Bitmap drawPhoto(Bitmap bitmap,boolean isRotated){
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();

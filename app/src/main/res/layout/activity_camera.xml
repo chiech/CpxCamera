@@ -12,24 +12,61 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:padding="5dp"
             android:layout_alignParentRight="true"
             android:orientation="horizontal"
-            android:background="@android:color/transparent">
-            <ImageView
+            android:gravity="right"
+            android:background="@android:color/white">
+
+            <FrameLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_camera_mode"
-                android:src="@drawable/icon_video"/>
-            <ImageView
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:id="@+id/btn_camera_switch"
-                android:layout_height="wrap_content"
-                android:src="@drawable/selector_rewardcamera"/>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:id="@+id/Tv_AppName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/app_name"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:gravity="center_vertical"/>
+
+                <Chronometer
+                    android:id="@+id/camera_chronometer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="20sp"
+                    android:textColor="@color/filter_color_pink_light"
+                    android:visibility="invisible" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="right">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="60px"
+                    android:id="@+id/btn_camera_beauty"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/beauty_btn"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50px"
+                    android:layout_gravity="center_vertical"
+                    android:id="@+id/btn_camera_switch"
+                    android:src="@drawable/switch_btn"/>
+            </LinearLayout>
+
         </LinearLayout>
     </RelativeLayout>
 
@@ -39,41 +76,153 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_gravity="bottom"
-            android:layout_height="150.0dip"
+            android:layout_height="110.0dip"
             android:paddingTop="5dip"
             android:paddingBottom="5dip"
+            android:orientation="vertical"
+            android:gravity="bottom"
             android:layout_alignParentBottom="true"
             android:background="@android:color/white">
-            <ImageView
-                android:id="@+id/btn_camera_beauty"
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:src="@drawable/btn_camera_beauty"
-                android:scaleType="center">
-            </ImageView>
-            <ImageView
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:id="@+id/btn_camera_shutter"
-                android:src="@drawable/btn_camera_shutter">
-            </ImageView>
-            <ImageView
-                android:layout_width="0dip"
-                android:layout_height="match_parent"
-                android:layout_weight="1.0"
-                android:scaleType="center"
-                android:id="@+id/btn_camera_filter"
-                android:src="@drawable/btn_camera_filter">
-            </ImageView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20px"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/Ll_photo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Tv_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20px"
+                        android:textSize="20sp"
+                        android:textColor="@color/filter_color_pink_light"
+                        android:textStyle="bold"
+                        android:text="Photo"/>
+
+                    <TextView
+                        android:id="@+id/Tv_photo_line"
+                        android:layout_width="60px"
+                        android:layout_height="15px"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="55px"
+                        android:background="@drawable/shape_line" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Ll_vedio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/Tv_vedio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        android:layout_marginLeft="20px"
+                        android:text="Vedio"/>
+                    <TextView
+                        android:id="@+id/Tv_vedio_line"
+                        android:layout_width="60px"
+                        android:layout_height="15px"
+                        android:layout_gravity="left"
+                        android:layout_marginLeft="55px"
+                        android:visibility="invisible"
+                        android:background="@drawable/shape_line"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/Iv_Album"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="5dp"
+                        android:src="@drawable/album">
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Album"/>
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/btn_camera_shutter"
+                    android:layout_weight="1"
+                    android:src="@drawable/photo_btn">
+                </ImageView>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:id="@+id/btn_camera_filter"
+                        android:src="@drawable/filter_btn">
+                    </ImageView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Filter"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
         </LinearLayout>
         <include
             android:id="@+id/layout_filter"
             layout="@layout/filter_layout"
             android:visibility="invisible"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="110dp"
             android:layout_gravity="bottom"/>
+        <include
+            android:id="@+id/layout_filter_beauty"
+            layout="@layout/filter_beauty_layout"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_gravity="bottom" />
     </FrameLayout>
 </LinearLayout>
