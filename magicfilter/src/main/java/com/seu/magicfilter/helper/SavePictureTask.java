@@ -1,6 +1,7 @@
 package com.seu.magicfilter.helper;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
@@ -67,16 +69,18 @@ public class SavePictureTask extends AsyncTask<Bitmap, Integer, String>{
 			file.delete();
 		}
 		try {
-			Bitmap trueBitmap = null;
-			Matrix matrix = new Matrix();
-			matrix.setRotate(Angle);
-			trueBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-			FileOutputStream out = new FileOutputStream(file);
-			trueBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-			out.flush();
-			out.close();
-			trueBitmap.recycle();
-			return file.toString();
+				Matrix matrix = new Matrix();
+				matrix.setRotate(Angle);
+
+				FileOutputStream out = new FileOutputStream(file);
+				bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
+				out.flush();
+				out.close();
+				bitmap.recycle();
+
+
+				return file.toString();
+
 		} catch (FileNotFoundException e) {
 		   e.printStackTrace();
 		} catch (IOException e) {
@@ -86,7 +90,7 @@ public class SavePictureTask extends AsyncTask<Bitmap, Integer, String>{
 	}
 	
 	public interface OnPictureSaveListener{
-		void onSaved(String result);
+		void onSaved(final String result);
 	}
 
 	public void setOnPictureSaveListener(OnPictureSaveListener onPictureSaveListener) {

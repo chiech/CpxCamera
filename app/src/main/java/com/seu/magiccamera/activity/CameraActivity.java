@@ -13,14 +13,17 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Point;
 import android.hardware.Camera;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.provider.MediaStore;
+import android.service.autofill.Transformation;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.PermissionChecker;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,6 +38,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.seu.magiccamera.R;
 import com.seu.magiccamera.adapter.FilterAdapter;
 import com.seu.magicfilter.MagicEngine;
@@ -43,11 +47,13 @@ import com.seu.magicfilter.filter.helper.MagicFilterType;
 import com.seu.magicfilter.helper.SavePictureTask;
 import com.seu.magicfilter.utils.MagicParams;
 import com.seu.magicfilter.widget.MagicCameraView;
+import com.squareup.picasso.Picasso;
 import com.warkiz.widget.IndicatorSeekBar;
 import com.warkiz.widget.OnSeekChangeListener;
 import com.warkiz.widget.SeekParams;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.URI;
@@ -241,11 +247,9 @@ public class CameraActivity extends Activity implements SavePictureTask.OnPictur
                     } else {
                         if(mode == MODE_PIC){
                             takePhoto();
-                            Log.e(TAG, "takephoto" );
                         }
                         else{
                             takeVideo();
-                            Log.e(TAG, "takevideo" );
                         }
                     }
                     break;
@@ -364,27 +368,55 @@ public class CameraActivity extends Activity implements SavePictureTask.OnPictur
 
     }
 
-    public void savePicture(File file, SavePictureTask.OnPictureSaveListener listener,int angle){
+    public void savePicture(final File file, SavePictureTask.OnPictureSaveListener listener, int angle){
         SavePictureTask savePictureTask = new SavePictureTask(file, listener,angle);
         MagicParams.magicBaseView.savePicture(savePictureTask);
-//        savePictureTask.setOnPictureSaveListener(new SavePictureTask.OnPictureSaveListener(){
-//            @Override
-//            public void onSaved(String result) {
-//                Iv_Album.setImageURI(Uri.parse(result));
-//            }
-//        });
+        savePictureTask.setOnPictureSaveListener(new SavePictureTask.OnPictureSaveListener(){
+            @Override
+            public void onSaved( String result) {
+                Log.e(TAG, "onSaved: "+result );
+//                Picasso.with(CameraActivity.this)
+//                        .load(result)
+//                        .resize(45,45)
+//                        .rotate(-90)
+//                        .into(Iv_Album);
+
+//                Matrix matrix = new Matrix();
+//                matrix.setScale(0.1f,0.1f);
+//                BitmapFactory.Options options =  new BitmapFactory.Options();
+//                options.inSampleSize = 2;
+//                options.inPreferredConfig = Bitmap.Config.ARGB_4444;
+//                Bitmap bitmap = BitmapFactory.decodeFile(result,options);
+//                Bitmap bmp = Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
+//                Iv_Album.setImageBitmap(bmp);
+//                bitmap.recycle();
+//                bmp.recycle();
+//
+//                Handler handler = new Handler();
+//                handler.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Log.e(TAG, "run: " );
+//                    }
+//                },5000);
+            }
+        });
 
     }
 
     private void takeVideo(){
         if(isRecording) {
             chronometer.stop();
+            Log.e(TAG, "takeVideo: stop record" );
             chronometer.setBase(SystemClock.elapsedRealtime());
             chronometer.setVisibility(View.INVISIBLE);
+            Tv_appname.setVisibility(View.VISIBLE);
             btn_shutter.setImageResource(R.drawable.video_btn);
             magicEngine.stopRecord();
         }else {
+            chronometer.setBase(SystemClock.elapsedRealtime());
             chronometer.start();
+            Log.e(TAG, "takeVideo: start record" );
             chronometer.setVisibility(View.VISIBLE);
             Tv_appname.setVisibility(View.INVISIBLE);
             btn_shutter.setImageResource(R.drawable.stop_video_btn);
@@ -543,14 +575,6 @@ public class CameraActivity extends Activity implements SavePictureTask.OnPictur
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINESE).format(new Date());
         File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
                 "IMG_" + timeStamp + ".jpg");
-
-        try {
-            ExifInterface exifInterface = new ExifInterface(mediaFile.getPath());
-            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-            Log.e("CameraActivity","Picture orientation is"+orientation);
-        }catch (IOException e){
-
-        }
 
         return mediaFile;
     }
